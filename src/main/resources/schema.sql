@@ -1,26 +1,25 @@
-create table if not exists CUSTOMERS
+create table if not exists PERSONS
 (
-    id           serial primary key,
-    name         varchar,
-    surname      varchar,
-    age          int,
-    phone_number text
+    name           text,
+    surname        text,
+    age            int,
+    phone_number   text,
+    city_of_living text,
+    PRIMARY KEY (name, surname, age)
 );
 
-create table if not exists ORDERS
-(
-    id           serial primary key,
-    date         varchar,
-    product_name varchar,
-    customer_id  int,
-    phone_number text,
-    FOREIGN KEY (customer_id) references customers (id)
-);
-
-INSERT INTO CUSTOMERS (name, surname, age, phone_number)
-VALUES ('Ivan', 'Petrov', 30, '+1234567890');
-
-INSERT INTO ORDERS (date, product_name, customer_id, phone_number)
-VALUES ('2024-09-23', 'Laptop', 1, '+1234567890');
 
 
+INSERT  INTO  PERSONS (name, surname, age, phone_number, city_of_living)
+VALUES ('Ivan', 'Petrov', 30, '+1234567890', 'Moscow')
+ON CONFLICT (name, surname, age) DO NOTHING;
+
+
+INSERT INTO PERSONS (name, surname, age, phone_number, city_of_living)
+VALUES ('Artem', 'Petrov', 30, '+1234567890', 'Astana')
+ON CONFLICT (name, surname, age) DO NOTHING;
+
+
+INSERT INTO PERSONS (name, surname, age, phone_number, city_of_living)
+VALUES ('Bibi', 'Petrova', 25, '+1234567890', 'Moscow')
+ON CONFLICT (name, surname, age) DO NOTHING;
