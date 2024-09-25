@@ -18,6 +18,11 @@ public class Controller {
         this.repository = repository;
     }
 
+    @GetMapping("/hello")
+    public String hello() {
+        return "Hello";
+    }
+
     @GetMapping("/persons/by-city")
     public List<Person> fetchByCity(@RequestParam String city) {
         return repository.findPersonByCityOfLiving(city);
